@@ -1,0 +1,41 @@
+*{
+    box-sizing: border-box;
+}
+
+#mensajes{
+    width: 300px;
+    padding: 15px;
+    border: 1px solid rgb(206, 206, 206);
+    background-color: rgb(235, 235, 235);
+}
+
+.view{
+    display: flex;
+    justify-content: space-around;
+}
+
+.tablero{
+    display: block;
+    text-align: center;
+    padding: 15px;
+    border: 1px solid rgb(206, 206, 206);
+    background-color: rgb(209, 209, 209);
+}
+
+td {
+    width: 25px;
+    height: 25px;
+    border: solid 1px lightgrey;
+    text-align: center;
+    font-size: 10pt;
+    background-color: white;
+  }
+
+.casilla{
+    border-radius: 50%;
+}
+  
+.hover:hover {
+    opacity: 0.5 !important;
+    cursor: pointer;
+}

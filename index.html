@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Battleship</title>
+    <link rel="stylesheet" href="css/app.css">
+    <script src="js/app.js"></script>
+</head>
+
+<body>
+    <div class="view">
+        <div class="tablero">
+            <p>Jugador</p>
+            <table id="playerTable"></table>
+            <span>Colocar barcos:</span>
+            <div id="botones">
+                <button id="btnHorizontal">Horizontal</button>
+                <button id="btnVertical">Vetical</button>
+                <button id="btnAleatorio">Aleatorio</button>
+            </div>
+        </div>
+        <div id="mensajes"></div>
+        <div class="tablero">
+            <p>IA</p>
+            <table id="iaTable"></table>
+        </div>
+    </div>
+    <script>
+        comenzarJuego();
+    </script>
+</body>
+
+</html>
