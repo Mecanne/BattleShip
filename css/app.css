@@ -4,9 +4,11 @@
 
 #mensajes{
     width: 300px;
+    max-height: 381px;
     padding: 15px;
     border: 1px solid rgb(206, 206, 206);
     background-color: rgb(235, 235, 235);
+    overflow-y: scroll;
 }
 
 .view{
