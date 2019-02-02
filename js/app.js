@@ -1,5 +1,5 @@
 /*jshint esversion: 6 */
-var enJuego = false; // Variable uqe controla si ha empezado el juego o no.
+var enJuego = false; // Variable que controla si ha empezado el juego o no.
 var juegoAcabado = false; // Variable que controla si el juego ha acabado.
 
 
@@ -122,6 +122,9 @@ class Jugador {
         this.barcosNoColocados = [5, 4, 3, 3, 2]; // Array que contiene la longitud de los barcos que no hemos introducido.
     }
 
+    /**
+     * Funcion para inicializar los dos tableros del jugador.
+     */
     inicializarTableros() {
         // Creamos el array que contiene las casillas del tablero.
         this.arrayBarcos = new Array(10);
@@ -150,6 +153,10 @@ class Jugador {
         }
     }
 
+    /**
+     * Funcion para establecer el contrincante del jugador
+     * @param {object} contrincante Referencia a la instancia del contrincante
+     */
     establecerContrincante(contrincante) {
         this.contrincante = contrincante;
     }
@@ -159,11 +166,19 @@ class Jugador {
         this.tablero = tablero;
     }
 
-    // Metodo exclusivo para el PC.
+    /**
+     * Funcion para disparar al contrincante
+     * @param {number} fila Fila a la que se va a disparar 
+     * @param {number} columna Columna a al que se va a disparar
+     */
     disparar(fila, columna) {
+        // Comprobamos que la posicon a la que queremos disparar esta dentro del tablero.
         if (fila >= 0 && fila < 10 && columna >= 0 && columna < 10) {
+            // Si es asi, comprobamos si se ha ejecutado ya el disparo en esa posición.
             if (!this.comprobarDisparo(fila, columna)) {
+                // Si no se ha realizado el ataque, cambia la casilla donde disparamos a 'X'.
                 this.contrincante.arrayDisparos[fila][columna] = 'X';
+                // Añade el disparo al array
                 this.añadirDisparo(fila, columna);
                 return true;
             }
@@ -175,6 +190,11 @@ class Jugador {
         }
     }
 
+    /**
+     * Funcion para añadir el disparo al array
+     * @param {number} fila Fila a la que se va a disparar 
+     * @param {number} columna Columna a al que se va a disparar
+     */
     añadirDisparo(fila, columna) {
         this.ataques.push([fila, columna]);
     }
@@ -197,7 +217,9 @@ class Jugador {
         }
     }
 
-    // Queda terminarlo
+    /**
+     * Funcion para dibujar el tablero
+     */
     dibujarTablero() {
         var contador = 0;
         var player = this; // Referencia al jugador.
@@ -269,6 +291,13 @@ class Jugador {
         }
     }
 
+    /**
+     * Funcion para colocar una barco
+     * @param {number} fila Fila donde se quiere colocar el barco
+     * @param {number} columna Columna donde se quiere colocar el barco
+     * @param {number} longitud Logintud del barco a insertar
+     * @param {number} direccion Direccion en la que se orientará el barco
+     */
     colocarBarco(fila, columna, longitud, direccion) {
         //console.log("Intentando colocar un barco de longitud: " + longitud + " en la posicion (" + fila + "," + columna + "), en la direccion: " + direccion);
         var arrayBarcos = this.arrayBarcos;
@@ -583,6 +612,9 @@ class Jugador {
         }
     }
 
+    /**
+     * Función para coocar los 5 barcos aleatoriamente
+     */
     colocarBarcosAleatorio() {
         var longitudBarcos = this.barcosNoColocados; // Array que contiene las longitudes de los barcos que podemos introducir.
         while (longitudBarcos.length !== 0) {
@@ -599,6 +631,9 @@ class Jugador {
         this.dibujarTablero();
     }
 
+    /**
+     * Funcion que comprueba si se han hundido todos los barcos del jugador
+     */
     comprobarVidaBarcos() {
         var barcos = this.barcos;
         var barcosHundidos = 0;
@@ -608,6 +643,12 @@ class Jugador {
         return (barcosHundidos === 5);
     }
 
+    /**
+     * Funcion para saber si en una posicionhay algun barco del array, si no se encuentra el barco, devuelve -1
+     * @param {number} fila Fila en la que se quiere comprobar
+     * @param {number} columna Columna en la que se quiere comprobar
+     * @returns {number} Posicion en la que se encuentra el barco en el array, si no se encuentra el barco, devuelve -1.
+     */
     comprobarBarco(fila, columna) {
         var barcos = this.barcos;
         for (let i = 0; i < barcos.length; i++) {
@@ -639,6 +680,11 @@ class Jugador {
         return -1;
     }
 
+    /**
+     * Funcion para restar 1 de vida a un barco
+     * @param {number} fila Fila donde se encuenta el barco
+     * @param {number} columna Columna donde se encuentra el barco.
+     */
     restarVidaBarco(fila, columna) {
         var posicionBarco = this.comprobarBarco(fila, columna);
         var vidaBarco = this.getVidaBarco(fila, columna);
@@ -646,6 +692,11 @@ class Jugador {
         return;
     }
 
+    /**
+     * Funcion para consultar la vida de un barco que esta en una determinada posicion.
+     * @param {number} fila Fila donde se encuentra el barco
+     * @param {number} columna Columna donde se encuentra el barco
+     */
     getVidaBarco(fila, columna) {
         var posicionBarco = this.comprobarBarco(fila, columna);
         return this.barcos[posicionBarco].getvida();
@@ -661,38 +712,61 @@ class Barco {
         this.vidas = longitud;
     }
 
+    /**
+     * Getter para la vida
+     */
     getvida() {
         return this.vidas;
     }
 
+    /**
+     * Getter para la fila
+     */
     getfila() {
         return this.fila;
     }
 
+    /**
+     * Getter para la columna
+     */
     getcolumna() {
         return this.columna;
     }
 
+    /**
+     * Getter para la longitud
+     */
     getlongitud() {
         return this.longitud;
     }
 
+    /**
+     * Getter para la direccion
+     */
     getdireccion() {
         return this.direccion;
     }
 
+    /**
+     * Setter para las vidas
+     * @param {number} cantidad Cantidad de vidas a establecer
+     */
     setvidas(cantidad) {
         this.vidas = cantidad;
     }
 
 }
 
+/**
+ * Funcion para añadir un mensaje al contenedor y mostrar las acciones de los usuarios.
+ * @param {number} mensaje Mensaje a añadir
+ */
 function añadirMensaje(mensaje) {
     var caja = document.getElementById('mensajes');
     caja.innerHTML = mensaje + '<br>' + caja.innerHTML;
 }
 
-// Funcion usada en el archivo HTML
+// Funcion usada en el archivo HTML para comenzar el juego
 function comenzarJuego() {
 
     const botonHorizontal = document.getElementById('btnHorizontal');

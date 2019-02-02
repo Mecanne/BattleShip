@@ -1,0 +1,19 @@
+{
+  "name": "battleshiptest",
+  "version": "1.0.0",
+  "description": "motor del juego hundir la flota",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [],
+  "author": "Daniel Díaz Navas",
+  "license": "GPL",
+  "devDependencies": {
+    "chai": "*",
+    "mocha": "*"
+  }
+}
